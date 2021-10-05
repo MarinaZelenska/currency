@@ -1,0 +1,12 @@
+# IDEA files
+/.idea
+
+# pytest cache files
+**/.pytest_cache
+**/__pycache__
+
+# Virtual Environment Info
+/env
+
+#SQLite
+db.sqlite3
