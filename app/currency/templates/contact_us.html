@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact US</title>
+
+    <style>
+th, td {
+  border-style: groove;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Contact US</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+
+    </tr>
+    {% for item in contacts %}
+    <tr>
+        <td><p>{{item.id}}</p></td>
+        <td><p>{{item.email_from}}</p></td>
+        <td><p>{{item.subject}}</p></td>
+        <td><p>{{item.message}}</p></td>
+    </tr>
+    {% endfor %}
+    </table>
+
+
+</body>
+</html>

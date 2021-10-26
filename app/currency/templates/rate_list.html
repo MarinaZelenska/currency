@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rates</title>
+
+    <style>
+th, td {
+  border-style:solid;
+  border-color: #96D4D4;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Rates  list</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>BUY</th>
+        <th>SALE</th>
+        <th>CREATED</th>
+        <th>TYPE</th>
+        <th>SOURCE</th>
+
+    </tr>
+    {% for rate in rates %}
+    <tr>
+        <td><p>{{rate.id}}</p></td>
+        <td><p>{{rate.buy}}</p></td>
+        <td><p>{{rate.sale}}</p></td>
+        <td><p>{{rate.created}}</p></td>
+        <td><p>{{rate.type}}</p></td>
+        <td><p>{{rate.source}}</p></td>
+    </tr>
+    {% endfor %}
+    </table>
+
+
+</body>
+</html>
+
