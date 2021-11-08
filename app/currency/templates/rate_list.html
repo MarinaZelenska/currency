@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block title %} Rate {% endblock title %}
+
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>BUY</th>
+        <th>SALE</th>
+        <th>CREATED</th>
+        <th>TYPE</th>
+        <th>SOURCE</th>
+
+    </tr>
+    {% for rate in rates %}
+    <tr>
+        <td><p>{{rate.id}}</p><a href="/rate/update/{{rate.id}}/">Edit</a><a href="/rate/delete/{{rate.id}}/"> Delete</a></td>
+        <td><p>{{rate.buy}}</p></td>
+        <td><p>{{rate.sale}}</p></td>
+        <td><p>{{rate.created}}</p></td>
+        <td><p>{{rate.type}}</p></td>
+        <td><p>{{rate.source}}</p></td>
+
+    </tr>
+    {% endfor %}
+    </table>
+
+{% endblock content %}
+
