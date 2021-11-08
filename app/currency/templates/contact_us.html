@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Contact US</title>
+{% extends 'base.html' %}
+{% block content %}
+{% block title %} Contact {% endblock title %}
 
-    <style>
-th, td {
-  border-style: groove;
-}
-</style>
 
-</head>
 
-<body>
-
-<h1>Contact US</h1>
 
 <table>
     <tr>
@@ -32,7 +22,4 @@ th, td {
     </tr>
     {% endfor %}
     </table>
-
-
-</body>
-</html>
+{% endblock content %}

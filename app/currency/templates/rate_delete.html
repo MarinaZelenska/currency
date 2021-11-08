@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block title %} Rate Delete {% endblock title %}
+
+<form method="post">
+
+    Are you sure you want to delete rate with id {{object.id}}
+
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Delete</button>
+
+    </form>
+
+
+{% endblock content %}
