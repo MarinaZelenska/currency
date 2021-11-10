@@ -14,9 +14,9 @@
         <th>SOURCE</th>
 
     </tr>
-    {% for rate in rates %}
+    {% for rate in object_list %}
     <tr>
-        <td><p>{{rate.id}}</p><a href="/rate/update/{{rate.id}}/">Edit</a><a href="/rate/delete/{{rate.id}}/"> Delete</a></td>
+        <td><p>{{rate.id}}</p><a href="{% url 'currency:rate_update' rate.id %}">Edit</a><br><a href="{% url 'currency:rate_details' rate.id %}"> Details</a><br><a href="{% url 'currency:rate_delete' rate.id %}"> Delete</a></td>
         <td><p>{{rate.buy}}</p></td>
         <td><p>{{rate.sale}}</p></td>
         <td><p>{{rate.created}}</p></td>
