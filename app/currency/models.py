@@ -23,3 +23,9 @@ class ContactUs(models.Model):
 class Source(models.Model):
     source_url = models.CharField(max_length=255)
     name = models.CharField(max_length=64)
+
+
+class RequestResponseLog(models.Model):
+    path = models.CharField(max_length=100)
+    request_method = models.CharField(max_length=10)
+    time = models.DecimalField(max_digits=6, decimal_places=2)

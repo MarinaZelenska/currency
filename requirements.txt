@@ -5,3 +5,7 @@ flake8
 flake8-builtins
 flake8-print
 flake8-import-order
+django-debug-toolbar
+django-admin-rangefilter
+django-import-export
+django-silk
