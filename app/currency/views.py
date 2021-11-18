@@ -1,7 +1,11 @@
-from currency.forms import RateForm, SourceForm
+from currency.forms import PasswordChangingForm, RateForm, SourceForm
 from currency.models import ContactUs, Rate, Source
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -62,22 +66,28 @@ class RateCreateView(CreateView):
     template_name = 'rate_create.html'
 
 
-class RateUpdateView(UpdateView):
+class RateUpdateView(UserPassesTestMixin, UpdateView):
     form_class = RateForm
     model = Rate
     success_url = reverse_lazy('currency:rate_list')
     template_name = 'rate_update.html'
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class RateDetailsView(DetailView):
+
+class RateDetailsView(LoginRequiredMixin, DetailView):
     model = Rate
     template_name = 'rate_details.html'
 
 
-class RateDeleteView(DeleteView):
+class RateDeleteView(UserPassesTestMixin, DeleteView):
     model = Rate
     template_name = 'rate_delete.html'
     success_url = reverse_lazy('currency:rate_list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 # Source
@@ -103,3 +113,22 @@ class SourceDeleteView(DeleteView):
     model = Source
     template_name = 'source_delete.html'
     success_url = reverse_lazy('currency:source_list')
+
+
+# Profile
+class ProfileView(LoginRequiredMixin, UpdateView):
+    queryset = get_user_model().objects.all()  # User
+    template_name = 'profile.html'
+    success_url = reverse_lazy('currency:rate_list')
+    fields = (
+        'first_name',
+        'last_name',
+    )
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangingForm
+    success_url = reverse_lazy('login')
