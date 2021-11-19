@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'import_export',
 
     'currency',
+    'account',
 
     'silk',
 ]
@@ -134,6 +135,7 @@ DEFAULT_FROM_EMAIL = 'zm9946000@gmail.com'
 LOGIN_REDIRECT_URL = reverse_lazy('currency:rate_list')
 LOGOUT_REDIRECT_URL = reverse_lazy('currency:rate_list')
 LOGIN_URL = reverse_lazy('login')
+AUTH_USER_MODEL = 'account.User'
 
 
 if DEBUG:
@@ -141,3 +143,7 @@ if DEBUG:
 
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[:-1] + '1' for ip in ips] + ['127.0.0.1', '10.0.2.2']
+
+# custom settings
+DOMAIN = 'localhost:8000'
+HTTP_SCHEMA = 'http'

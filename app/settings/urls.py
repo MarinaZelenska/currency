@@ -9,7 +9,7 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('currency/', include('currency.urls')),
     path('auth/', include('django.contrib.auth.urls')),
-    # path('account/', include('account.urls')),
+    path('account/', include('account.urls')),
 
     path('silk/', include('silk.urls', namespace='silk')),
 
