@@ -11,7 +11,7 @@ class Rate(models.Model):
         choices=mch.RateTypeChoices.choices,
         default=mch.RateTypeChoices.USD,
     )
-    source = models.CharField(max_length=25)
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)
 
 
 class ContactUs(models.Model):
@@ -23,6 +23,9 @@ class ContactUs(models.Model):
 class Source(models.Model):
     source_url = models.CharField(max_length=255)
     name = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.name
 
 
 class RequestResponseLog(models.Model):
