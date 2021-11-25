@@ -9,4 +9,7 @@ app_name = 'account'
 urlpatterns = [
     path('signup/', views.UserSignUpView.as_view(), name='signup'),
     path('activate/<uuid:username>/', views.UserActivateView.as_view(), name='activate'),
+
+    path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('password_change/', views.PasswordsChangeView.as_view(), name='password_change'),
 ]

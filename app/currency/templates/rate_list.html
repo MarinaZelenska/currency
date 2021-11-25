@@ -1,31 +1,65 @@
 {% extends 'base.html' %}
+
+{% block title %}Table{% endblock title %}
+
 {% block content %}
-{% block title %} Rate {% endblock title %}
 
+    <div class="row">
+        <div class="col-12">
+            <a href="{% url 'currency:rate_create' %}">Create Rate</a>
+            <br>
 
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Sale</th>
+                    <th scope="col">Buy</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Source</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for rate in object_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ rate.id }}</td>
+                        <td>{{ rate.get_type_display }}</td>
+                        <td>{{ rate.sale }}</td>
+                        <td>{{ rate.buy }}</td>
+                        <td>{{ rate.created }}</td>
+                        <td>{{ rate.source.name }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'currency:rate_details' rate.id %}">Details</a>
+                                    <a class="dropdown-item" href="{% url 'currency:rate_update' rate.id %}">Edit</a>
+                                    <a class="dropdown-item" href="{% url 'currency:rate_delete' rate.id %}">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>BUY</th>
-        <th>SALE</th>
-        <th>CREATED</th>
-        <th>TYPE</th>
-        <th>SOURCE</th>
-
-    </tr>
-    {% for rate in object_list %}
-    <tr>
-        <td><p>{{rate.id}}</p><a href="{% url 'currency:rate_update' rate.id %}">Edit</a><br><a href="{% url 'currency:rate_details' rate.id %}"> Details</a><br><a href="{% url 'currency:rate_delete' rate.id %}"> Delete</a></td>
-        <td><p>{{rate.buy}}</p></td>
-        <td><p>{{rate.sale}}</p></td>
-        <td><p>{{rate.created}}</p></td>
-        <td><p>{{ rate.get_type_display }}</p></td>
-        <td><p>{{rate.source}}</p></td>
-
-    </tr>
-    {% endfor %}
-    </table>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            Col 1
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            Col 2
+        </div>
+    </div>
 
 {% endblock content %}
 

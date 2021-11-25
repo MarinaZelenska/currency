@@ -3,12 +3,13 @@ import uuid
 from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.urls import reverse
 
 
 class UserSignUpForm(forms.ModelForm):
-
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
 
@@ -38,7 +39,7 @@ class UserSignUpForm(forms.ModelForm):
 
     def _send_email(self):
         subject = 'Thanks for sign up'
-        path = reverse('account:activate', args=(self.instance.username, ))
+        path = reverse('account:activate', args=(self.instance.username,))
         body = f'''
         {settings.HTTP_SCHEMA}://{settings.DOMAIN}{path}
         '''
@@ -49,3 +50,29 @@ class UserSignUpForm(forms.ModelForm):
             [self.instance.email],
             fail_silently=False,
         )
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+
+    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={
+        'class': 'your class',
+        'placeholder': 'your placeholder',
+        'type': 'email',
+        'name': 'email'
+    }))
+
+
+class PasswordChangingForm(PasswordChangeForm):
+    current_password = forms.CharField(max_length=100,
+                                       widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password'}))
+    new_password = forms.CharField(max_length=100,
+                                   widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password'}))
+    confirm_new_password = forms.CharField(max_length=100,
+                                           widget=forms.PasswordInput(
+                                               attrs={'class': 'form-control', 'type': 'password'}))
+
+    class Meta:
+        model = User
+        fields = ('current_password', 'new_password', 'confirm_new_password')

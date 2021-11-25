@@ -30,11 +30,13 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rangefilter',
     'import_export',
+    'storages',
 
     'currency',
     'account',
 
     'silk',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -117,9 +119,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.parent / 'static_content' / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -147,3 +155,13 @@ if DEBUG:
 # custom settings
 DOMAIN = 'localhost:8000'
 HTTP_SCHEMA = 'http'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# AWS_S3_REGION_NAME = 'fra1'
+# AWS_S3_ENDPOINT_URL = 'https://hhhhjhj.fra1.digitaloceanspaces.com/'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_ACCESS_KEY_ID = 'DHLQ4ECCUK543W6PRD6B'
+# AWS_SECRET_ACCESS_KEY = 'EGVSCbm0bJevs8isPRkmOatLL+YtlivEqjLfHd4W8pw'
+# AWS_STORAGE_BUCKET_NAME = 'media'
+# MEDIA_URL = 'https://hillel-test.fra1.digitaloceanspaces.com/media/'
+# AWS_DEFAULT_ACL = 'public-read'

@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 {% block title %} Source Update {% endblock title %}
-
-<form method="post">
+ <img src= "{{  request.user.logo_url }}" height="100" width="150">
+    <br>
+{% load crispy_forms_tags %}
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.as_p}}
+    {{ form|crispy  }}
     <button type="submit">Send</button>
 
     </form>
