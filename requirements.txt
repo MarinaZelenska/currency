@@ -9,3 +9,8 @@ django-debug-toolbar
 django-admin-rangefilter
 django-import-export
 django-silk
+django-storages
+django-crispy-forms
+Celery
+requests
+beautifulsoup4

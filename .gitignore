@@ -10,3 +10,11 @@ env/
 
 #SQLite
 app/db.sqlite3
+#rabbit
+rabbitmq_server-3.9.10/
+rabbitmq.ico
+uninstall.exe
+
+app/celerybeat-schedule.bak
+app/celerybeat-schedule.dat
+app/celerybeat-schedule.dir
