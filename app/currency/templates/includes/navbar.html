@@ -1,19 +1,48 @@
-<p>
-    <a href="{% url 'currency:rate_list' %}">Rate</a><br>
-    <a href="{% url 'currency:contact_list' %}">Contact</a><br>
-    <a href="{% url 'currency:contactus-create' %}">Contact Us Create</a><br>
-    <a href="{% url 'currency:rate_create' %}">Create Rate</a><br>
-    <a href="{% url 'currency:source_list' %}">Source List</a><br>
-    <a href="{% url 'currency:source_create' %}">Create Source</a><br>
-    <a href="{% url 'password_change' %}">Change Password</a><br>
+<div class="p-3 mb-2 bg-dark text-white">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-     {% if request.user.is_authenticated %}
-        Welcome: {{ request.user.username }}
-        <a href="{% url 'currency:profile' %}">My Profile</a>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'account:signup' %}">Sign Up</a>
-        <a href="{% url 'login' %}">Login</a>
-    {% endif %}
-
-</p>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'currency:rate_list' %}">Rates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'currency:source_list' %}">Source</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'currency:contactus-create' %}">Contact Us</a>
+            </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:profile' %}">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:signup' %}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
+             <li class="nav-item">
+                    <div class="social-container" >
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-codepen"></i></a>
+                     </div>
+                </li>
+        </ul>
+    </div>
+</nav>
+</div>

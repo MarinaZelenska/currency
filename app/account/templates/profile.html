@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
+    <img src="{{ request.user.avatar_url }}" height="100" width="150">
+    <br>
     My Profile
-
-    <form method="post">
+{% load crispy_forms_tags %}
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy  }}
         <button type="submit">Submit</button>
     </form>
 {% endblock content %}
