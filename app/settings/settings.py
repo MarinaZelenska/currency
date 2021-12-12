@@ -1,6 +1,8 @@
 from pathlib import Path
 
+from celery.schedules import crontab
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -156,6 +158,15 @@ if DEBUG:
 DOMAIN = 'localhost:8000'
 HTTP_SCHEMA = 'http'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BEAT_SCHEDULE = {
+    'parse_privatbank': {
+        'task': 'currency.tasks.parse_privatbank',
+        'schedule': crontab(minute='*/1'),
+        # 'schedule': crontab(minute='*/15'),
+    },
+}
 
 # AWS_S3_REGION_NAME = 'fra1'
 # AWS_S3_ENDPOINT_URL = 'https://hhhhjhj.fra1.digitaloceanspaces.com/'

@@ -1,10 +1,9 @@
 from currency.forms import RateForm, SourceForm
 from currency.models import ContactUs, Rate, Source
+from currency.tasks import send_email_in_background
 
-from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -31,24 +30,27 @@ class ContactUsCreateView(CreateView):
         'message',
     )
 
-    def _send_email(self):
-        subject = 'User ContactUs'
-        body = f'''
-               Email to reply: {self.object.email_from}
-               Subject: {self.object.subject}
-               Body: {self.object.message}
-           '''
-        send_mail(
-            subject,
-            body,
-            settings.DEFAULT_FROM_EMAIL,
-            [settings.DEFAULT_FROM_EMAIL],
-            fail_silently=False,
-        )
-
     def form_valid(self, form):
         redirect = super().form_valid(form)
-        self._send_email()
+        subject = 'User ContactUs'
+        body = f'''
+            Email to reply: {self.object.email_from}
+            Subject: {self.object.subject}
+            Body: {self.object.message}
+        '''
+        send_email_in_background.delay(subject, body)
+        # send_email_in_background.apply_async(args=(subject, body))
+        '''
+        00-8.59 | 9.00-19.00 | 19.01 - 23.59
+        9.00    |    send    | 9.00 next day
+        '''
+        # from datetime import datetime, timedelta
+        # eta = datetime(2021, 11, 21, 19, 00, 00)
+        # send_email_in_background.apply_async(
+        #     kwargs={'subject': subject, 'body': body},
+        #     countdown=120,
+        # eta=eta,
+        # )
         return redirect
 
 

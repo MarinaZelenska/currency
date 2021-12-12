@@ -34,6 +34,7 @@ class Source(models.Model):
         null=True,
         blank=True,
     )
+    code_name = models.CharField(max_length=64, unique=True)
 
     @property
     def logo_url(self):
