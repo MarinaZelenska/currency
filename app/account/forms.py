@@ -19,6 +19,7 @@ class UserSignUpForm(forms.ModelForm):
             'email',
             'password1',
             'password2',
+            'phone',
         )
 
     def clean(self):
