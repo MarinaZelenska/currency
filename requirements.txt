@@ -15,3 +15,11 @@ Celery
 requests
 beautifulsoup4
 django-filter
+djangorestframework
+djangorestframework-simplejwt
+drf-yasg
+pytest
+pytest-django
+pytest-reportlog
+pytest-cov
+pytest-mock
